@@ -1,0 +1,12 @@
+
+# GET http://localhost:3003/api/blogs HTTP/1.1
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "The epiphany of a concious coder (part2)",
+    "author": "Ifeanyi Cyriacus",
+    "url": "http://localhost:3003/api/blogs",
+    "likes": 3
+}
