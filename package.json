@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "deploy": "git push heroku master",
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint .",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "Ifeanyi Cyriacus",
   "license": "ISC",
@@ -15,10 +17,15 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "lodash": "^4.17.20",
     "mongoose": "^5.10.9"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
-    "nodemon": "^2.0.4"
+    "jest": "^26.6.1",
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
   }
 }
