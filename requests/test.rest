@@ -13,7 +13,7 @@
 # #     "likes": 3
 # # }
 
-PUT http://localhost:3030/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
+PUT http://localhost:3003/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
 Content-Type: application/json
 
 {
