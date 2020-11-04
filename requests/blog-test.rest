@@ -1,17 +1,17 @@
 
-GET http://localhost:3003/api/users/ HTTP/1.1
-
 # GET http://localhost:3003/api/blogs/ HTTP/1.1
 
 # DELETE  http://localhost:3003/api/blogs/5f99e85f9427f9498cdc18e8 HTTP/1.1
 
-POST http://localhost:3003/api/users
+POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "username": "aino007",
-    "password": "mukava",
-    "name": "Aino Otso"
+    "title": "lover",
+    "author": "Taylor Swift",
+    "url": "http://localhost:3003/api/blogs",
+    "likes": 300,
+    "user":"5fa223ee54a1983324960d8a"
 }
 
 # PUT http://localhost:3003/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
@@ -21,5 +21,5 @@ Content-Type: application/json
 #     "title": "The epiphany of a concious coder (part2)",
 #     "author": "Taylor Swift",
 #     "url": "http://localhost:3003/api/blogs",
-#     "likes": 3
+#     "likes": 3,
 # }
