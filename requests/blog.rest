@@ -1,18 +1,38 @@
 
-GET http://localhost:3003/api/blogs/ HTTP/1.1
+# GET http://localhost:3003/api/blogs/ HTTP/1.1
 
+
+# # user1 blog
+# POST http://localhost:3003/api/blogs
+# Content-Type: application/json
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDU4NjY5MH0.GqWWk4foJZkuLlOKd_Qjy9eAQUjFHMfovpelIhiV3kU
+
+# {
+#     "title": "B2C Trading",
+#     "author": "Jumia",
+#     "url": "http://localhost:3003/api/blogs",
+#     "likes": 30
+# }
+
+# # user1 delete
 # DELETE  http://localhost:3003/api/blogs/5f99e85f9427f9498cdc18e8 HTTP/1.1
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDU4NjY5MH0.GqWWk4foJZkuLlOKd_Qjy9eAQUjFHMfovpelIhiV3kU
 
-POST http://localhost:3003/api/blogs
-Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDQ2Mzk4N30.AM67KmpUmcD2dNnOXM7yGLcTCTQcJwjM1VeQAmT7yek
+# # user2
+# POST http://localhost:3003/api/blogs
+# Content-Type: application/json
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNDFjMzA3MzMxNjgyNzQwODBmNGQyIiwiaWF0IjoxNjA0NTkwNzgwfQ.UWW5TTfTlAQP3MgDrX-CwL9gEW8rpmYDBmp_RPVlHyc
 
-{
-    "title": "Honey Honey Honey",
-    "author": "Abba",
-    "url": "http://localhost:3003/api/blogs",
-    "likes": 300
-    }
+# {
+#     "title": "welcome to the new world: thank you",
+#     "author": "CIVM",
+#     "url": "http://localhost:3003/api/blogs",
+#     "likes": 30
+# }
+    
+# user2 delete
+DELETE  http://localhost:3003/api/blogs/5fa22605eb3767427091740d HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNDFjMzA3MzMxNjgyNzQwODBmNGQyIiwiaWF0IjoxNjA0NTkyNjUxfQ.s25fU1jZ0dfpag6lHd1INvD5U1zfM6f0T7SdZawSQlA
 
 # PUT http://localhost:3003/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
 # Content-Type: application/json

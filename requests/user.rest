@@ -1,18 +1,30 @@
 
-GET http://localhost:3003/api/users/ HTTP/1.1
+# GET http://localhost:3003/api/users/ HTTP/1.1
 
 # GET http://localhost:3003/api/blogs/ HTTP/1.1
 
 # DELETE  http://localhost:3003/api/blogs/5f99e85f9427f9498cdc18e8 HTTP/1.1
 
-POST http://localhost:3003/api/users
-Content-Type: application/json
+# # user1
+# POST http://localhost:3003/api/users
+# Content-Type: application/json
 
-{
-    "username": "aino",
-    "password": "mukava",
-    "name": "Aino Otso"
-}
+# {
+#     "username": "aino",
+#     "password": "mukava",
+#     "name": "Aino Otso"
+# }
+
+# # user2
+# POST http://localhost:3003/api/users
+# Content-Type: application/json
+
+# {
+#     "username": "cyriacusifeanyi",
+#     "password": "holla",
+#     "name": "Cyriacus Ifeanyi"
+# }
+
 
 # PUT http://localhost:3003/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
 # Content-Type: application/json
