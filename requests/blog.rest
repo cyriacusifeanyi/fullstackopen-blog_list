@@ -1,18 +1,18 @@
 
-# GET http://localhost:3003/api/blogs/ HTTP/1.1
+GET http://localhost:3003/api/blogs/ HTTP/1.1
 
 # DELETE  http://localhost:3003/api/blogs/5f99e85f9427f9498cdc18e8 HTTP/1.1
 
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDQ2Mzk4N30.AM67KmpUmcD2dNnOXM7yGLcTCTQcJwjM1VeQAmT7yek
 
 {
-    "title": "lover",
-    "author": "Taylor Swift",
+    "title": "Honey Honey Honey",
+    "author": "Abba",
     "url": "http://localhost:3003/api/blogs",
-    "likes": 300,
-    "user":"5fa223ee54a1983324960d8a"
-}
+    "likes": 300
+    }
 
 # PUT http://localhost:3003/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
 # Content-Type: application/json
