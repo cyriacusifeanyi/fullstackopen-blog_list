@@ -1,4 +1,4 @@
-# user1
+# # user1
 # POST http://localhost:3003/api/login HTTP/1.1
 # Content-Type: application/json
 
@@ -15,5 +15,3 @@ Content-Type: application/json
     "username": "cyriacusifeanyi",
     "password": "holla"
 }
-
-# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNDFjMzA3MzMxNjgyNzQwODBmNGQyIiwiaWF0IjoxNjA0NTkwNzgwfQ.UWW5TTfTlAQP3MgDrX-CwL9gEW8rpmYDBmp_RPVlHyc
