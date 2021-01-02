@@ -1,5 +1,19 @@
 
-# GET http://localhost:3003/api/blogs/ HTTP/1.1
+
+# GET  http://localhost:3001/api/blogs/
+
+# GET  http://localhost:3001/api/blogs/5fec4a422cea2b293458383f 
+
+POST http://localhost:3001/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "1234567890"
+}
+
+# GET  http://localhost:3001/api/blogs/5fec4a422cea2b293458383f HTTP/1.1
+# Authorization: bearer 
 
 
 # user1 blog
@@ -18,28 +32,28 @@
 # DELETE  http://localhost:3003/api/blogs/5f99e85f9427f9498cdc18e8 HTTP/1.1
 # Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDU4NjY5MH0.GqWWk4foJZkuLlOKd_Qjy9eAQUjFHMfovpelIhiV3kU
 
-# user2
-POST http://localhost:3003/api/blogs
-Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDc2MjkzM30.WdmIOPK3MkyeY-MFQJ1saDqujBYB1aWOije6GVSPZhI
+# # user2
+# POST http://localhost:3003/api/blogs
+# Content-Type: application/json
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDgyMDQxMX0.2bDXztrl_c2MGwztt-G5nwyfYz6CTyMacpY3aStNnaU
 
-{
-    "title": "welcome to the new world: thank you",
-    "author": "CIVM",
-    "url": "http://localhost:3003/api/blogs",
-    "likes": 30
-}
+# {
+#     "title": "welcome to the new world: thank you",
+#     "author": "CIVM",
+#     "url": "http://localhost:3003/api/blogs",
+#     "likes": 30
+# }
     
 # # user2 delete
 # DELETE  http://localhost:3003/api/blogs/5fa22605eb3767427091740d HTTP/1.1
 # Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNDFjMzA3MzMxNjgyNzQwODBmNGQyIiwiaWF0IjoxNjA0NTkyNjUxfQ.s25fU1jZ0dfpag6lHd1INvD5U1zfM6f0T7SdZawSQlA
 
-# PUT http://localhost:3003/api/blogs/5f9ad3bbccd005590819c006 HTTP/1.1
-# Content-Type: application/json
+PUT http://localhost:3001/api/blogs/5fec4a422cea2b293458383f HTTP/1.1
+Content-Type: application/json
 
-# {
-#     "title": "The epiphany of a concious coder (part2)",
-#     "author": "Taylor Swift",
-#     "url": "http://localhost:3003/api/blogs",
-#     "likes": 3,
-# }
+{
+    "title": "The epiphany of a concious coder (part2)",
+    "author": "Taylor Swift",
+    "url": "http://localhost:3003/api/blogs",
+    "likes": 3,
+}

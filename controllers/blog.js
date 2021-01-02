@@ -73,17 +73,43 @@ blogsRouter.delete('/:id', async (request, response) => {
 
 // update by id
 blogsRouter.put('/:id', async (request, response) => {
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if (!request.token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  const userId = decodedToken.id
+  const blog = await Blog.findById(request.params.id)
   const body = request.body
 
-  const blog = {
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes
-  }
+  if (blog.user.toString() === userId.toString()) {
+    let blogObject = { 'title': null, 'author': null, 'url': null, 'likes': null }
 
-  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
-  response.json(updatedBlog.toJSON())
+    let labels = ['title', 'author', 'url', 'likes']
+    for (let i = 0; i < labels.length; i++) {
+
+      // console.log('1 hello: ', body[labels[i]])
+
+      if ((body[labels[i]] !== null) && (body[labels[i]] !== undefined)) {//if not null
+        // console.log('2 hello: ', typeof (body[labels[i]]))
+        blogObject[labels[i]] = body[labels[i]]
+      } else {
+        // console.log('3 hello: ', body[labels[i]])
+        blogObject[labels[i]] = blog[labels[i]]
+      }
+
+    }
+    console.log('body :', body)
+    console.log('blog :', blog)
+    console.log('blogObject :', blogObject)
+
+
+
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blogObject, { new: true })
+    response.json(updatedBlog.toJSON())
+    response.status(204).end()
+  } else {
+    response.status(403).end()//406 Not Acceptable
+  }
 
 })
 

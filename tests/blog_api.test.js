@@ -4,49 +4,50 @@ const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
 
-// const Blog = require('../models/blog')
+const Blog = require('../models/blog')
+const User = require('../models/user')
+
 jest.setTimeout(20000)
 
-let rightUserToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNDFjMzA3MzMxNjgyNzQwODBmNGQyIiwiaWF0IjoxNjA0ODIwNzMzfQ.Hspr1GszvAqnjXdt6M7qyao3wMARpKOHOAQhCNZovAo'
-const wrongUserToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDgxOTc5MH0.fMfqCckCK73LS44Bx318yhRv4kUSrWyxWkRbJKcY4_w'
-const invalidUserToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDgxOTc5MH0.fMfqCckCK73LS44Bx318yhRv4kUSrWyxWkRbJKcY4_w'
+beforeEach(async () => {
+  await Blog.deleteMany({})
+  await User.deleteMany({})
+
+  const blogObject = helper.initialBlogs
+    .map(blog => new Blog(blog))
+  const promiseArray = blogObject
+    .map(blog => blog.save())
+
+  // The Promise.all method can be used for
+  // transforming an array of promises into
+  // a single promise, that will be fulfilled
+  // once every promise in the array passed to
+  // it as a parameter is resolved
+  await Promise.all(promiseArray)
+})
 
 // login here to get auth token
-describe('login', () => {
+// describe('login', () => {
 
-  test('correct user detail passes', async () => {
-    let response = await api.post('/api/login')
-      .send({ 'username': 'aino', 'password': 'mukava' })
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-    console.log(response.token)
-    rightUserToken = response.token
+//   test('correct user detail passes', async () => {
+//     let response = await api.post('/api/login')
+//       .send({ 'username': 'aino', 'password': 'mukava' })
+//       .expect(200)
+//       .expect('Content-Type', /application\/json/)
+//     console.log(response.token)
+//     rightUserToken = response.token
 
-  })
+//   })
 
-  test('incorrect user detail fails', async () => {
-    await api.post('/api/login')
-      .send({ 'username': 'wrongUsername', 'password': 'wrongPassword' })
-      .expect(401)
-      .expect('Content-Type', /application\/json/)
+//   test('incorrect user detail fails', async () => {
+//     await api.post('/api/login')
+//       .send({ 'username': 'wrongUsername', 'password': 'wrongPassword' })
+//       .expect(401)
+//       .expect('Content-Type', /application\/json/)
 
-  })
-})
-// beforeEach(async () => {
-//   await Blog.deleteMany({})
-
-//   const blogObject = helper.initialBlogs
-//     .map(blog => new Blog(blog))
-//   const promiseArray = blogObject
-//     .map(blog => blog.save())
-
-//   // The Promise.all method can be used for
-//   // transforming an array of promises into
-//   // a single promise, that will be fulfilled
-//   // once every promise in the array passed to
-//   // it as a parameter is resolved
-//   await Promise.all(promiseArray)
+//   })
 // })
+
 
 // 4.8: Blog list tests, step1
 describe('correct amount of blog posts in the JSON format', () => {
@@ -83,6 +84,28 @@ test('verifies that the unique identifier property of the blog posts is named id
 //   the proper status code 401 Unauthorized if a token is not provided
 
 describe('addition of new blog', () => {
+  let headers
+
+  beforeEach(async () => {
+    const newUser = {
+      username: 'janedoez',
+      name: 'Jane Z. Doe',
+      password: 'password',
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+
+    const result = await api
+      .post('/api/login')
+      .send(newUser)
+
+    headers = {
+      'Authorization': `bearer ${result.body.token}`
+    }
+  })
+
   // 4.10: Blog list tests, step3
   test('a valid blog can be added', async () => {
     const newBlog = {
@@ -97,9 +120,9 @@ describe('addition of new blog', () => {
 
     await api
       .post('/api/blogs')
-      .set('Authorization', rightUserToken)
       .send(newBlog)
-      .expect(200)
+      .set(headers)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -120,27 +143,27 @@ describe('addition of new blog', () => {
       url: 'http://localhost:3003/api/blogs',
       likes: 54,
     }
-    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFpbm8iLCJpZCI6IjVmYTIyM2VlNTRhMTk4MzMyNDk2MGQ4YSIsImlhdCI6MTYwNDgxOTc5MH0.fMfqCckCK73LS44Bx318yhRv4kUSrWyxWkRbJKcY4_w'
 
     const blogsAtStart = await helper.blogsInDb()
 
     await api
       .post('/api/blogs')
-      // .set('Authorization', rightUserToken)
       .send(newBlog)
+      // .set(headers)
       .expect(401)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
-    // verify that the total number of blogs in the system is increased by one
-    expect(blogsAtEnd).toHaveLength(blogsAtStart.length + 1)
+    // verify that the total number of blogs in the system is the same
+    expect(blogsAtEnd).toHaveLength(blogsAtStart.length)
 
     const titles = blogsAtEnd.map(r => r.title)
-    // verify that the content of the blog post is saved correctly to the database
-    expect(titles).toContain(
+    // verify that the content of the blog post is is not saved into the database
+    expect(titles).not.toContain(
       'Intelligent Investor'
     )
   })
+
   // 4.11*: Blog list tests, step4
   test('if a blog omitts a non-required property (likes) it still gets added', async () => {
     const newBlog = {
@@ -152,10 +175,9 @@ describe('addition of new blog', () => {
 
     await api
       .post('/api/blogs')
-      .set('Authorization', rightUserToken)
-
       .send(newBlog)
-      .expect(200)
+      .set(headers)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -177,7 +199,9 @@ describe('addition of new blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set(headers)
       .expect(400)
+      .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
