@@ -4,22 +4,24 @@
 
 # GET  http://localhost:3001/api/blogs/5fec4a422cea2b293458383f 
 
-POST http://localhost:3001/api/login HTTP/1.1
-Content-Type: application/json
+# POST http://localhost:3001/api/login HTTP/1.1
+# Content-Type: application/json
 
-{
-    "username": "admin",
-    "password": "1234567890"
-}
+# {
+#     "username": "admin",
+#     "password": "1234567890"
+# }
 
 # GET  http://localhost:3001/api/blogs/5fec4a422cea2b293458383f HTTP/1.1
-# Authorization: bearer 
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZmVlMzVlZDY2YWY0NDM3MjhlM2UyZjIiLCJpYXQiOjE2MDk0NDcyMTN9.QEgV3VgrxL_t5SfB9IOac-5A3dYHWk0nIj4wLLX4fKg
 
+# DELETE   http://localhost:3001/api/blogs/5fee363466af443728e3e2f3 HTTP/1.1
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZmVlMzVlZDY2YWY0NDM3MjhlM2UyZjIiLCJpYXQiOjE2MDk0NDcyMTN9.QEgV3VgrxL_t5SfB9IOac-5A3dYHWk0nIj4wLLX4fKg
 
 # user1 blog
-# POST http://localhost:3003/api/blogs
+# POST http://localhost:3001/api/blogs
 # Content-Type: application/json
-# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNmI3ZTM3NWM2NDM1NjgwNWFmMDhhIiwiaWF0IjoxNjA0NzYxNzE5fQ.CmqDsbdUekO2DVfPEICmoOiNLzQwLkoVo3sAJlaPjtg
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZmVlMzVlZDY2YWY0NDM3MjhlM2UyZjIiLCJpYXQiOjE2MDk0NDcyMTN9.QEgV3VgrxL_t5SfB9IOac-5A3dYHWk0nIj4wLLX4fKg
 
 # {
 #     "title": "B2C Trading",
@@ -47,13 +49,15 @@ Content-Type: application/json
 # # user2 delete
 # DELETE  http://localhost:3003/api/blogs/5fa22605eb3767427091740d HTTP/1.1
 # Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN5cmlhY3VzaWZlYW55aSIsImlkIjoiNWZhNDFjMzA3MzMxNjgyNzQwODBmNGQyIiwiaWF0IjoxNjA0NTkyNjUxfQ.s25fU1jZ0dfpag6lHd1INvD5U1zfM6f0T7SdZawSQlA
+# get http://localhost:3001/api/blogs/5fee38ae66af443728e3e2f6 HTTP/1.1
 
-PUT http://localhost:3001/api/blogs/5fec4a422cea2b293458383f HTTP/1.1
+PUT http://localhost:3001/api/blogs/5fee38ae66af443728e3e2f6 HTTP/1.1
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZmVlMzVlZDY2YWY0NDM3MjhlM2UyZjIiLCJpYXQiOjE2MDk0NDcyMTN9.QEgV3VgrxL_t5SfB9IOac-5A3dYHWk0nIj4wLLX4fKg
 
 {
-    "title": "The epiphany of a concious coder (part2)",
-    "author": "Taylor Swift",
-    "url": "http://localhost:3003/api/blogs",
-    "likes": 3,
+    # "title": "B2C Trading",
+    # "author": "Jiji",
+    # "url": "http://localhost:3003/api/blogs",
+    "likes": 23
 }

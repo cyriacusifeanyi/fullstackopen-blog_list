@@ -1,27 +1,27 @@
 
-# GET http://localhost:3001/api/users/ HTTP/1.1
+GET http://localhost:3001/api/users/ HTTP/1.1
 
-# GET http://localhost:3003/api/blogs/ HTTP/1.1
+# GET http://localhost:3001/api/blogs/ HTTP/1.1
 
 # DELETE  http://localhost:3003/api/blogs/5f99e85f9427f9498cdc18e8 HTTP/1.1
 
-# # user1
-POST http://localhost:3003/api/users
-Content-Type: application/json
+# # # user1
+# POST http://localhost:3001/api/users
+# Content-Type: application/json
 
-{
-    "username": "apple",
-    "password": "pineapple",
-    "name": "apple pineapple"
-}
+# {
+#     "username": "admin",
+#     "password": "1234567890",
+#     "name": "Super Admin"
+# }
 
 # user2
-# POST http://localhost:3003/api/users
+# POST http://localhost:3001/api/users
 # Content-Type: application/json
 
 # {
 #     "username": "cyriacusifeanyi",
-#     "password": "holla",
+#     "password": "zx12cv36",
 #     "name": "Cyriacus Ifeanyi"
 # }
 
