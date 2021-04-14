@@ -41,6 +41,8 @@ blogsRouter.post('/', async (request, response) => {
 // get by id
 blogsRouter.get('/:id', async (request, response) => {
   const blog = await Blog.findById(request.params.id)
+    .populate('user', { username: 1, name: 1, id: 1 })
+
   if (blog) {
     response.json(blog.toJSON())
   } else {
@@ -87,22 +89,13 @@ blogsRouter.put('/:id', async (request, response) => {
     let labels = ['title', 'author', 'url', 'likes']
     for (let i = 0; i < labels.length; i++) {
 
-      // console.log('1 hello: ', body[labels[i]])
-
       if ((body[labels[i]] !== null) && (body[labels[i]] !== undefined)) {//if not null
-        // console.log('2 hello: ', typeof (body[labels[i]]))
         blogObject[labels[i]] = body[labels[i]]
       } else {
-        // console.log('3 hello: ', body[labels[i]])
         blogObject[labels[i]] = blog[labels[i]]
       }
 
     }
-    console.log('body :', body)
-    console.log('blog :', blog)
-    console.log('blogObject :', blogObject)
-
-
 
     const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blogObject, { new: true })
     response.json(updatedBlog.toJSON())
@@ -111,6 +104,32 @@ blogsRouter.put('/:id', async (request, response) => {
     response.status(403).end()//406 Not Acceptable
   }
 
+})
+
+// add comment to blogs by id
+blogsRouter.post('/:id/comments', async (request, response) => {
+
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if (!request.token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+  const body = request.body
+  const blog = await Blog.findById(request.params.id) //current blog state
+
+  let blogObject = {
+    'title': blog['title'],
+    'author': blog['author'],
+    'url': blog['url'],
+    'likes': blog['likes'],
+    'comments': [
+      ...blog.comments,
+      body.comment
+    ]
+  }
+
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blogObject, { new: true })
+  response.json(updatedBlog.toJSON())
+  response.status(204).end()
 })
 
 module.exports = blogsRouter
